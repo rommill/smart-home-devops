@@ -1,0 +1,15 @@
+# Бинарные файлы Go
+backend/backend
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Данные Docker (если они создались в папке проекта)
+pg_data/
+mongo_data/
+
+# Логи и системные файлы
+*.log
+.DS_Store

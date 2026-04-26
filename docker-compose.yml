@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  db_relational:
+    image: postgres:16-alpine
+    container_name: smart_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: smart_password
+      POSTGRES_DB: smart_home_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  db_nosql:
+    image: mongo:7.0
+    container_name: smart_mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  broker:
+    image: eclipse-mosquitto:2.0
+    container_name: smart_broker
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+volumes:
+  pg_data:
+  mongo_data:
